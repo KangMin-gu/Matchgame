@@ -10,14 +10,19 @@ public class UsersDaoImpl implements UsersDao {
 
     @Autowired
     private SqlSession session;
-
+    //회원가입
     @Override
     public void insertSignup(UsersDto usersDto) {
         session.insert("users.insert", usersDto);
     }
-
+    //회원정보검색
     @Override
     public UsersDto userInfo(String id) {
         return session.selectOne("users.getData" , id);
+    }
+    //회원탈퇴
+    @Override
+    public void secession(String id) {
+        session.delete("users.delete", id);
     }
 }

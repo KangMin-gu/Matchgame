@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -61,5 +62,14 @@ public class UsersController {
         usersservice.signout(request);
     }
 
-
+    //회원탈퇴
+    @RequestMapping(value = "/auth/info/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Map<String, Object> secession(HttpServletRequest request, @PathVariable String id){
+        usersservice.secession(request, id);
+        System.out.println("삭제아이디"+id);
+        Map<String, Object> result = new HashMap<>();
+        result.put("result", true);
+        return result;
+    }
 }

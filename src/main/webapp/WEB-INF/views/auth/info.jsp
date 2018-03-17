@@ -14,7 +14,6 @@
     <title>Insert title here</title>
 </head>
 <body>
-
 <p>나의 정보</p>
 ${dto.id}<br/>
 ${dto.name}<br/>
@@ -23,11 +22,33 @@ ${dto.email}<br/>
 ${dto.addr}<br/>
 ${dto.detailaddr}<br/>
 ${dto.regdate}<br/>
-
-<a href="">정보수정</a>
-<a href="">회원탈퇴</a>
+<a href="">회원정보수정</a>
+<a href="javascript:reallyDelete()">회원탈퇴</a>
 <a href="">홈으로</a>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
+<script>
+    function reallyDelete(){
+       var result = confirm("탈퇴 하시겠습니까?");
+        if(result){
+             $.ajax({
+                url:"/auth/info/${dto.id}",
+                method: "DELETE",
+                dataType:'json',
+                success:function(data){
+                    console.log(data.result);
+                    if(data.result != false ){
+                        alert("모든 정보가 삭제 되었습니다.");
+                        location.href="${pageContext.request.contextPath}/";
+                    }
+                },
+                 error:function(request, status, error) {
+                     console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                 }
+             });
 
+        }
+    }
+</script>
 </body>
 </html>
 

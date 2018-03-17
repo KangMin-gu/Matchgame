@@ -12,4 +12,5 @@ public interface UsersService {
     public Map<String, Object> signinResult(HttpServletRequest request);
     public ModelAndView myInfo(String id);
     public void signout(HttpServletRequest request);
+    public void secession(HttpServletRequest request, String id);
 }

@@ -95,6 +95,12 @@ public class UsersServiceImpl implements UsersService {
     public void signout(HttpServletRequest request) {
         request.getSession().invalidate();
     }
+    //회원탈퇴
+    @Override
+    public void secession(HttpServletRequest request, String id) {
+        request.getSession().invalidate();
+        usersDao.secession(id);
+    }
 
 
 }
