@@ -22,16 +22,19 @@ ${dto.email}<br/>
 ${dto.addr}<br/>
 ${dto.detailaddr}<br/>
 ${dto.regdate}<br/>
-<a href="">회원정보수정</a>
+<a href="${pageContext.request.contextPath}/auth/modified/${dto.id}">회원정보수정</a>
 <a href="javascript:reallyDelete()">회원탈퇴</a>
-<a href="">홈으로</a>
+<a href="${pageContext.request.contextPath}/">홈으로</a>
+
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 <script>
+
+
     function reallyDelete(){
        var result = confirm("탈퇴 하시겠습니까?");
         if(result){
              $.ajax({
-                url:"/auth/info/${dto.id}",
+                url:"${dto.id}",
                 method: "DELETE",
                 dataType:'json',
                 success:function(data){

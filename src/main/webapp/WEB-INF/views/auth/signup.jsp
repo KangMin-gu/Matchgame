@@ -33,11 +33,11 @@
 </form>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 </body>
-/* $(function(){
-userSignup();
-});
-*/
 <script>
+
+    $("#cancelBtn").click(function(){
+        location.href="${pageContext.request.contextPath}/";
+    });
 
     $("#insertBtn").click(function(){
 

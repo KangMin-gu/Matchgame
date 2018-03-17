@@ -7,4 +7,5 @@ public interface UsersDao {
     public void insertSignup(UsersDto usersDto);
     public UsersDto userInfo(String id);
     public void secession(String id);
+    public void modified(UsersDto usersDto);
 }

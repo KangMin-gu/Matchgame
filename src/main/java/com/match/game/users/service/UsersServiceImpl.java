@@ -102,5 +102,12 @@ public class UsersServiceImpl implements UsersService {
         usersDao.secession(id);
     }
 
+    @Override
+    public void modified(HttpServletRequest request, UsersDto usersDto) {
+        String pwd = usersDto.getPwd();
+        String hash = encoder.encode(pwd);
+        usersDto.setPwd(hash);
+        usersDao.modified(usersDto);
+    }
 
 }

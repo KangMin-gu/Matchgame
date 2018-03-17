@@ -1,12 +1,10 @@
 package com.match.game.users.controller;
 
+import com.match.game.users.dto.UsersDto;
 import com.match.game.users.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,4 +70,21 @@ public class UsersController {
         result.put("result", true);
         return result;
     }
+
+    //회원정보수정페이지
+    @RequestMapping(value = "/auth/modified/{id}", method = RequestMethod.GET)
+    public ModelAndView modifiedForm(HttpServletRequest request, @PathVariable String id){
+        ModelAndView mView = usersservice.myInfo(id);
+        mView.setViewName("auth/modified");
+        return mView;
+    }
+
+    @RequestMapping(value = "/auth/modified/editauth", method = RequestMethod.PUT)
+    @ResponseBody
+    public void modified(HttpServletRequest request, @RequestBody UsersDto usersDto){
+        System.out.println(usersDto.getId());
+        usersservice.modified(request, usersDto);
+    }
+
+
 }

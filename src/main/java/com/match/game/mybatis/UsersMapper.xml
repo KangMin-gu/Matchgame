@@ -17,4 +17,9 @@
 		DELETE from users where id=#{id}
 	</delete>
 
+    <update id="update" parameterType="usersDto">
+        UPDATE users SET
+        email=#{email}, pwd=#{pwd}, post=#{post}, addr=#{addr}, detailaddr=#{detailaddr}, phone=#{phone}
+        WHERE id=#{id}
+    </update>
 </mapper>

@@ -19,6 +19,11 @@
 </form>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 <script>
+
+    $("#cancelBtn").click(function(){
+        location.href="${pageContext.request.contextPath}/";
+    });
+
     //ajax 로그인
     $("#signInBtn").click(function () {
         $.ajax({

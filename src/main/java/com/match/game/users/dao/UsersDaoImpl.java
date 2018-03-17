@@ -25,4 +25,9 @@ public class UsersDaoImpl implements UsersDao {
     public void secession(String id) {
         session.delete("users.delete", id);
     }
+
+    @Override
+    public void modified(UsersDto usersDto) {
+        session.update("users.update", usersDto);
+    }
 }
