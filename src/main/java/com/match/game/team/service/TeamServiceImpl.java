@@ -79,10 +79,26 @@ public class TeamServiceImpl implements TeamService {
     public void teamsecession(TeamDto teamDto) {
         teamDao.teamsecession(teamDto);
     }
-
+    //팀 해체
     @Override
     public void dismantling(int number) {
         teamDao.dismantling(number);
+    }
+    //팀 리스트
+    @Override
+    public ModelAndView teamlist() {
+        List<TeamDto> allList = teamDao.teamlist();
+        ModelAndView mView = new ModelAndView();
+        mView.addObject("allList", allList);
+        return mView;
+    }
+
+    @Override
+    public ModelAndView teamContents(int num) {
+        TeamDto teamDto = teamDao.teamContents(num);
+        ModelAndView mView = new ModelAndView();
+        mView.addObject("dto", teamDto);
+        return mView;
     }
 
 

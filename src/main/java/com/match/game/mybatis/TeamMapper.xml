@@ -10,6 +10,7 @@
     <select id="myteam" parameterType="String" resultType="teamDto">
         SELECT * from team where top=#{lolid} or mid=#{lolid} or bottom=#{lolid} or jungle=#{lolid} or support=#{lolid} or main=#{lolid}
     </select>
+
     <!--팀 탈퇴-->
     <update id="secession" parameterType="teamDto">
         update team
@@ -22,9 +23,19 @@
         </set>
         WHERE num=#{num}
     </update>
+
     <!--팀 해체-->
     <delete id="dismantling" parameterType="int">
       DELETE from team where num=#{number}
     </delete>
 
+    <!--팀 전체 검색-->
+    <select id="teamlist" resultType="teamDto">
+      SELECT * from team
+    </select>
+
+    <!--팀 자세히 보기-->
+    <select id="contents" parameterType="int" resultType="teamDto">
+        SELECT  * from team WHERE num=#{num}
+    </select>
 </mapper>

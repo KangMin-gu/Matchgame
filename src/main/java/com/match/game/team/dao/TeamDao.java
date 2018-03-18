@@ -9,4 +9,6 @@ public interface TeamDao {
     public List<TeamDto> myteam(String lolid);
     public void teamsecession(TeamDto teamDto);
     public void dismantling(int number);
+    public List<TeamDto> teamlist();
+    public TeamDto teamContents(int num);
 }

@@ -85,7 +85,7 @@
             data: $("#teamMakeForm").serialize(),
             success:function(){
                 alert("${dto.id}님 팀이 생성되었습니다. 팀원을 초대하세요.");
-                <%--location.href="${pageContext.request.contextPath}/team/teaminfo";--%>
+                location.href="${pageContext.request.contextPath}/team/teaminfo";
             },
             error:function(request, status, error){
                 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

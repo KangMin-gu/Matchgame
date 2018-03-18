@@ -13,10 +13,35 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
 </head>
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
 <body>
-팀찾기
+팀 전체리스트
+<table>
+    <thead>
+    <tr>
+        <th>팀이름</th>
+        <th>승리</th>
+        <th>패배</th>
+        <th>주장</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${allList}" var="tmp">
+        <tr>
+            <td><a href="contents/${tmp.num}">${tmp.teamname}</a></td>
+            <td>${tmp.win}</td>
+            <td>${tmp.lose}</td>
+            <td>${tmp.main}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
 <ul>
-    <li><a href=""></a></li>
+    <li><a href="${pageContext.request.contextPath}/">홈</a></li>
 </ul>
 </body>
 </html>

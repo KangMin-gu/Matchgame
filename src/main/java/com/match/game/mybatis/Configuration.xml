@@ -7,12 +7,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  	<typeAliases>
 		<typeAlias type="com.match.game.users.dto.UsersDto" alias="usersDto" />
 		<typeAlias type="com.match.game.team.dto.TeamDto" alias="teamDto" />
+		<typeAlias type="com.match.game.facing.dto.FacingDto" alias="facingDto" />
 	</typeAliases>
 	
 	<!-- sql 문을 정의하고 있는 xml 문서 -->
 <mappers>
 	<mapper resource="com/match/game/mybatis/UsersMapper.xml"/>
 	<mapper resource="com/match/game/mybatis/TeamMapper.xml"/>
+	<mapper resource="com/match/game/mybatis/FacingMapper.xml"/>
 </mappers>
 
 </configuration>

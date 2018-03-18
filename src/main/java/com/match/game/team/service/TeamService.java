@@ -11,4 +11,6 @@ public interface TeamService {
     public ModelAndView myteam(String id);
     public void teamsecession(TeamDto teamDto);
     public void dismantling(int number);
+    public ModelAndView teamlist();
+    public ModelAndView teamContents(int num);
 }

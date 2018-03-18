@@ -65,4 +65,18 @@ public class TeamController {
         teamService.dismantling(number);
     }
 
+    @RequestMapping(value = "/team/teamlist", method = RequestMethod.GET)
+    public ModelAndView teamlist(){
+        ModelAndView mView = teamService.teamlist();
+        mView.setViewName("team/teamlist");
+        return mView;
+    }
+
+    @RequestMapping(value = "/team/contents/{num}", method = RequestMethod.GET)
+    public ModelAndView teamcontents(@PathVariable int num) {
+        System.out.println(num);
+        ModelAndView mView = teamService.teamContents(num);
+        mView.setViewName("team/contents");
+        return mView;
+    }
 }

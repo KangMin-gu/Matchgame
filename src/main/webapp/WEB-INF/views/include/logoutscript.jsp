@@ -14,6 +14,21 @@ function logout(){
     });
 }
 
+$(document).ready(function(){
+    var check = '${id}';
+    if(check != ""){
+        $.ajax({
+            url:"facing/${id}",
+            method:"GET",
+            dataType:'json',
+            success:function(data){
+            console.log(data);
+            $("#facingNo").text("쪽지함"+"("+data.facingNo+")");
+            }
+        });
+    }
+});
+
 
 
 

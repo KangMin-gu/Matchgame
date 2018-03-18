@@ -18,7 +18,7 @@
         <ul>
             <li><a href="auth/info/${id}">회원정보</a></li>
             <li><a href="team/teaminfo">팀 관리</a></li>
-            <li><a href="">쪽지함</a></li>
+            <li><a id="facingNo" href="facing/list">쪽지함</a></li>
             <li><a href="javascript:logout()">로그아웃</a></li>
         </ul>
     </c:when>
@@ -39,6 +39,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 <script>
     <%@include file="include/logoutscript.jsp"%>
+
 </script>
 </body>
 </html>

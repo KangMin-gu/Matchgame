@@ -20,7 +20,6 @@
 </style>
 <body>
 팀정보입니다.
-    ${dto.lolid}
     <table>
         <thead>
         <tr>
@@ -61,6 +60,7 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 <script>
+    //팀탈퇴
     function teamSecession(num, top, mid, bottom, support, jungle){
           $.ajax({
               url:"secession",
@@ -76,6 +76,7 @@
               }
           });
     }
+    //팀해체
     function teamDismantling(num){
         $.ajax({
             url: num,
@@ -89,11 +90,6 @@
             }
         });
     }
-
-
-
-
-
 </script>
 </body>
 </html>

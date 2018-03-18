@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="facing">
+
+	<select id="facinglist" parameterType="String" resultType="facingDto">
+		SELECT * FROM facing WHERE who=#{lolid}
+	</select>
+
+	<insert id="apply" parameterType="facingDto">
+		INSERT INTO facing (who, writer, title, content, regdate)
+		VALUES (#{who}, #{writer}, #{title}, #{content}, sysdate())
+	</insert>
+
+	<select id="facingNo" parameterType="String" resultType="int">
+		SELECT COUNT(decode(viewer,'n')) FROM facing WHERE who=#{lolid};
+	</select>
+</mapper>
