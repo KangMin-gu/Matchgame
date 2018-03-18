@@ -10,4 +10,5 @@ public interface TeamService {
     public void makeTeam(HttpServletRequest request);
     public ModelAndView myteam(String id);
     public void teamsecession(TeamDto teamDto);
+    public void dismantling(int number);
 }

@@ -80,5 +80,10 @@ public class TeamServiceImpl implements TeamService {
         teamDao.teamsecession(teamDto);
     }
 
+    @Override
+    public void dismantling(int number) {
+        teamDao.dismantling(number);
+    }
+
 
 }

@@ -51,7 +51,7 @@
             <td>${tmp.lose}</td>
             <td><a href="javascript:teamSecession('${tmp.num}', '${tmp.top}', '${tmp.mid}', '${tmp.bottom}', '${tmp.support}', '${tmp.jungle}' )">팀 탈퇴</a></td>
             <c:if test="${dto.lolid eq tmp.main}">
-            <td><a href="javascript:teamSecession()">팀 해체</a></td>
+            <td><a href="javascript:teamDismantling('${tmp.num}')">팀 해체</a></td>
             </c:if>
         </tr>
     </c:forEach>
@@ -61,7 +61,6 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 <script>
-    var teamname = null;
     function teamSecession(num, top, mid, bottom, support, jungle){
           $.ajax({
               url:"secession",
@@ -77,6 +76,24 @@
               }
           });
     }
+    function teamDismantling(num){
+        $.ajax({
+            url: num,
+            method:"DELETE",
+            success:function(){
+                alert("팀 해체 되었습니다.");
+                location.reload();
+            },
+            error:function(request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+    }
+
+
+
+
+
 </script>
 </body>
 </html>

@@ -57,5 +57,12 @@ public class TeamController {
         teamService.teamsecession(teamDto);
     }
 
+    //팀해체
+    @RequestMapping(value = "/team/myteam/{num}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void Dismantiling(@PathVariable String num){
+        int number = Integer.parseInt(num);
+        teamService.dismantling(number);
+    }
 
 }

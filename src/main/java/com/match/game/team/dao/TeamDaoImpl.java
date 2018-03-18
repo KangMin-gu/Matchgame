@@ -29,5 +29,10 @@ public class TeamDaoImpl implements TeamDao {
         session.update("team.secession", teamDto);
     }
 
+    @Override
+    public void dismantling(int number) {
+        session.delete("team.dismantling", number);
+    }
+
 
 }
