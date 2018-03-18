@@ -13,6 +13,7 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     private TeamDao teamDao;
 
+    //팀만들기
     @Override
     public void makeTeam(HttpServletRequest request) {
         String teamname =  request.getParameter("teamname");
