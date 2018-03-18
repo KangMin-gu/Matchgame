@@ -43,8 +43,10 @@ public class FacingController {
     }
 
     //쪽지 상세보기
-    @RequestMapping(value = "/facing/contents",method = RequestMethod.GET)
-    public ModelAndView facingContents(HttpServletRequest request){
-        return null;
+    @RequestMapping(value = "/facing/contents/{num}",method = RequestMethod.GET)
+    public ModelAndView facingContents(@PathVariable int num){
+        ModelAndView mView = facingService.facingContents(num);
+        mView.setViewName("facing/contents");
+        return mView;
     }
 }

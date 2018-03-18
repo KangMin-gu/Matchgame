@@ -70,6 +70,7 @@ public class FacingServiceImpl implements FacingService {
 
     }
 
+    //안읽은 쪽지 갯수
     @Override
     public Map<String, Object> facingNo(String id) {
 
@@ -79,6 +80,21 @@ public class FacingServiceImpl implements FacingService {
        Map<String, Object> facingNo = new HashMap<>();
        facingNo.put("facingNo", facingNum);
        return facingNo;
+    }
+
+    //글 읽기 하면서 읽음표시 Y 로바꾸기
+    @Override
+    public ModelAndView facingContents(int num) {
+        FacingDto viewerdto = new FacingDto();
+
+        viewerdto.setNum(num);
+        viewerdto.setViewer("Y");
+        facingDao.facingViewer(viewerdto);
+
+        FacingDto facingDto = facingDao.facingContents(num);
+        ModelAndView mView = new ModelAndView();
+        mView.addObject("dto",facingDto);
+        return mView;
     }
 
 }

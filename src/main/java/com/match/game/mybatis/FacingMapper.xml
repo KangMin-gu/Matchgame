@@ -2,16 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="facing">
 
+	<!--쪽지 함-->
 	<select id="facinglist" parameterType="String" resultType="facingDto">
 		SELECT * FROM facing WHERE who=#{lolid}
 	</select>
 
+	<!--쪽지 보내기-->
 	<insert id="apply" parameterType="facingDto">
 		INSERT INTO facing (who, writer, title, content, regdate)
 		VALUES (#{who}, #{writer}, #{title}, #{content}, sysdate())
 	</insert>
 
+	<!--쪽지 갯수-->
 	<select id="facingNo" parameterType="String" resultType="int">
-		SELECT COUNT(decode(viewer,'n')) FROM facing WHERE who=#{lolid};
+		select count(case when viewer='n' then who=#{lolid} end ) from facing
 	</select>
+
+	<!--쪽지 상세보기-->
+	<select id="facingContents" parameterType="int" resultType="facingDto">
+		SELECT * FROM facing WHERE num=#{num}
+	</select>
+
+	<!--쪽지 읽음으로 바꾸기 -->
+	<update id="facingviewer" parameterType="facingDto">
+		UPDATE facing SET viewer=#{viewer} WHERE num=#{num}
+	</update>
 </mapper>

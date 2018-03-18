@@ -32,4 +32,17 @@ public class FacingDaoImpl implements FacingDao{
         int facingNo = session.selectOne("facing.facingNo", lolid);
         return facingNo;
     }
+
+    //쪽지 상세보기
+    @Override
+    public FacingDto facingContents(int num) {
+        FacingDto facingDto = session.selectOne("facing.facingContents", num);
+        return facingDto;
+    }
+
+    //쪽지 읽음표시
+    @Override
+    public void facingViewer(FacingDto viewerdto) {
+        session.update("facing.facingviewer", viewerdto);
+    }
 }

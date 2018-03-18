@@ -21,9 +21,13 @@ $(document).ready(function(){
             url:"facing/${id}",
             method:"GET",
             dataType:'json',
-            success:function(data){
+            success:function(data) {
             console.log(data);
-            $("#facingNo").text("쪽지함"+"("+data.facingNo+")");
+            if (data.facingNo != 0) {
+                    $("#facingNo").text("쪽지함" + "(" + data.facingNo + ")");
+                }else{
+                    $("#facingNo").text("쪽지함");
+                }
             }
         });
     }

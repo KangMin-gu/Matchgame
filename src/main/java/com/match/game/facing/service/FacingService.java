@@ -9,4 +9,5 @@ public interface FacingService {
     public ModelAndView facing(HttpServletRequest request);
     public void apply(HttpServletRequest request, int num);
     public Map<String, Object> facingNo (String id);
+    public ModelAndView facingContents(int num);
 }

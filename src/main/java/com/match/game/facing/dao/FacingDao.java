@@ -8,4 +8,6 @@ public interface FacingDao {
     public List<FacingDto> facing(String lolid);
     public void apply(FacingDto facingDto);
     public int facingNo(String lolid);
+    public FacingDto facingContents(int num);
+    public void facingViewer(FacingDto viewerdto);
 }

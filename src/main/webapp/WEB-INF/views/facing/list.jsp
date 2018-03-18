@@ -43,6 +43,10 @@
     </tbody>
     <a href="${pageContext.request.contextPath}/">메인가기</a>
 </table>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
+<script>
+
+</script>
 </body>
 </html>
 
