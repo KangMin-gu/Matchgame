@@ -64,14 +64,14 @@ public class TeamController {
         int number = Integer.parseInt(num);
         teamService.dismantling(number);
     }
-
+    //팀리스트
     @RequestMapping(value = "/team/teamlist", method = RequestMethod.GET)
     public ModelAndView teamlist(){
         ModelAndView mView = teamService.teamlist();
         mView.setViewName("team/teamlist");
         return mView;
     }
-
+    //팀상세보기
     @RequestMapping(value = "/team/contents/{num}", method = RequestMethod.GET)
     public ModelAndView teamcontents(@PathVariable int num) {
         System.out.println(num);
@@ -79,4 +79,20 @@ public class TeamController {
         mView.setViewName("team/contents");
         return mView;
     }
+    //팀신청
+    @RequestMapping(value = "/team/join", method = RequestMethod.GET)
+    public ModelAndView joinForm (HttpServletRequest request){
+        ModelAndView mView = teamService.joinForm(request);
+        mView.setViewName("team/join");
+        return mView;
+    }
+
+    //팀 합류
+    @RequestMapping(value = "/facing/contents/team/accept", method = RequestMethod.GET)
+    public ModelAndView accept(HttpServletRequest request){
+        ModelAndView mView = teamService.accept(request);
+        mView.setViewName("team/accept");
+        return mView;
+    }
+
 }
