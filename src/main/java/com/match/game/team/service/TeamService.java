@@ -13,4 +13,6 @@ public interface TeamService {
     public void dismantling(int number);
     public ModelAndView teamlist();
     public ModelAndView teamContents(int num);
+    public ModelAndView joinForm(HttpServletRequest request);
+    public ModelAndView accept(HttpServletRequest request);
 }

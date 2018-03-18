@@ -101,5 +101,54 @@ public class TeamServiceImpl implements TeamService {
         return mView;
     }
 
+    //가입신청서 이동
+    @Override
+    public ModelAndView joinForm(HttpServletRequest request) {
+        String id = (String) request.getSession().getAttribute("id");
+        UsersDto usersDto = usersDao.userInfo(id);
+
+        String lolid = usersDto.getLolid();
+        String teamname = request.getParameter("teamname");
+        String main = request.getParameter("main");
+        int num = Integer.parseInt(request.getParameter("num"));
+
+        ModelAndView mView = new ModelAndView();
+
+        mView.addObject("num", num);
+        mView.addObject("lolid", lolid);
+        mView.addObject("teamname", teamname);
+        mView.addObject("main", main);
+
+        return mView;
+    }
+
+    //팀 합류
+    @Override
+    public ModelAndView accept(HttpServletRequest request) {
+       int num = Integer.parseInt(request.getParameter("num"));
+       String top = request.getParameter("top");
+       String mid =request.getParameter("mid");
+       String bottom =request.getParameter("bottom");
+       String support = request.getParameter("support");
+       String jungle =request.getParameter("jungle");
+       String lolid = request.getParameter("lolid");
+
+       TeamDto teamDto = new TeamDto();
+
+       teamDto.setNum(num);
+       teamDto.setTop(top);
+       teamDto.setMid(mid);
+       teamDto.setBottom(bottom);
+       teamDto.setSupport(support);
+       teamDto.setJungle(jungle);
+
+       teamDao.accept(teamDto);
+       ModelAndView mView = new ModelAndView();
+       mView.addObject("lolid", lolid);
+
+       return mView;
+
+    }
+
 
 }

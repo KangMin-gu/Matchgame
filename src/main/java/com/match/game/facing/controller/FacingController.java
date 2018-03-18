@@ -27,10 +27,10 @@ public class FacingController {
     }
 
     //신청서 쪽지 발송
-    @RequestMapping(value = "/team/contents/apply/{num}", method = RequestMethod.POST)
+    @RequestMapping(value = "/team/apply", method = RequestMethod.POST)
     @ResponseBody
-    public void apply(HttpServletRequest request, @PathVariable int num){
-        facingService.apply(request, num);
+    public void apply(HttpServletRequest request){
+        facingService.apply(request);
     }
 
     //서버과부화 막기위해 페이지로딩마다 쪽지 안읽은 쪽지 갯수 확인

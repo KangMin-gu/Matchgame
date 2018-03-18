@@ -52,5 +52,10 @@ public class TeamDaoImpl implements TeamDao {
         return teamDto;
     }
 
+    @Override
+    public void accept(TeamDto teamDto) {
+        session.update("team.accept", teamDto);
+    }
+
 
 }

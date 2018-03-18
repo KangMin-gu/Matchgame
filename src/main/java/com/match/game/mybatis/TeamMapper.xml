@@ -38,4 +38,17 @@
     <select id="contents" parameterType="int" resultType="teamDto">
         SELECT  * from team WHERE num=#{num}
     </select>
+
+    <!--팀 합류-->
+    <update id="accept" parameterType="teamDto">
+        update team
+            <set>
+                <if test="top != null">top=#{top} ,</if>
+                <if test="mid != null">mid=#{mid} ,</if>
+                <if test="bottom != null">bottom=#{bottom} ,</if>
+                <if test="support != null">support=#{support} ,</if>
+                <if test="jungle != null">jungle=#{jungle} </if>
+            </set>
+            WHERE num=#{num}
+    </update>
 </mapper>

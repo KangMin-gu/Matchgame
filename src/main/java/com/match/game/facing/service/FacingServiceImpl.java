@@ -3,7 +3,6 @@ package com.match.game.facing.service;
 import com.match.game.facing.dao.FacingDao;
 import com.match.game.facing.dto.FacingDto;
 import com.match.game.team.dao.TeamDao;
-import com.match.game.team.dto.TeamDto;
 import com.match.game.users.dao.UsersDao;
 import com.match.game.users.dto.UsersDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,29 +41,65 @@ public class FacingServiceImpl implements FacingService {
 
     //팀 가입신청
     @Override
-    public void apply(HttpServletRequest request, int num){
+    public void apply(HttpServletRequest request){
+
         String id = (String) request.getSession().getAttribute("id");
+        String number = request.getParameter("num");
+        String teamname = request.getParameter("teamname");
+        String main =request.getParameter("main");
+        String top = request.getParameter("top");
+        String mid = request.getParameter("mid");
+        String bottom = request.getParameter("bottom");
+        String support = request.getParameter("support");
+        String jungle = request.getParameter("jungle");
 
-        TeamDto teamDto = teamDao.teamContents(num);
         UsersDto usersDto = usersDao.userInfo(id);
-
-        String title = usersDto.getLolid()+"님이 "+teamDto.getTeamname()+"팀에 가입 신청서를 보냈습니다.";
-
-        String contents = "<p>"+usersDto.getLolid()+"님이 "+teamDto.getTeamname()+"팀과 함께 소환사의 협곡에 참여하고 싶어합니다.</p>"
-                + "<p>신청을 수락을 눌르시면 "+usersDto.getLolid()+" 님과 소환사의 협곡에 참여하게 됩니다. </p>"
-                + "<a href=\"${pageContext.request.contextPath}/team/teamlist\">신청수락</a>";
-
+        String joinlolid = usersDto.getLolid();
 
         FacingDto facingDto = new FacingDto();
+        String title = joinlolid+" 님이 " +teamname+ " 팀에 합류하고 싶어합니다.";
 
-        //누구에게 보내기
-        facingDto.setWho(teamDto.getMain());
-        //보내는이
-        facingDto.setWriter(usersDto.getLolid());
-        //제목
+        if(top != null){
+            String content =
+                    joinlolid+" 님의 포지션은 Top 입니다."
+                            +"<br/>"
+                            + "신청을 수락 하시면"+joinlolid+" 님이 "+teamname+" 팀에 합류 합니다."
+                            + "<a href=\"team/accept?num="+number+"&lolid="+joinlolid+"&top="+top+"\">신청수락</a>";
+            facingDto.setContent(content);
+        }else if(mid != null){
+            String content =
+                    joinlolid+" 님의 포지션은 Mid 입니다."
+                            +"<br/>"
+                            + "신청을 수락 하시면"+joinlolid+" 님이 "+teamname+" 팀에 합류 합니다."
+                            + "<a href=\"team/accept?num="+number+"&lolid="+joinlolid+"&mid="+mid+"\">신청수락</a>";
+            facingDto.setContent(content);
+        }else if(bottom != null){
+            String content =
+                    joinlolid+" 님의 포지션은  Dealer 입니다."
+                            +"<br/>"
+                            + "신청을 수락 하시면"+joinlolid+" 님이 "+teamname+" 팀에 합류 합니다."
+                            + "<a href=\"team/accept?num="+number+"&lolid="+joinlolid+"&bottom="+bottom+"\">신청수락</a>";
+            facingDto.setContent(content);
+        }else if(support != null){
+            String content =
+                    joinlolid+" 님의 포지션은 Supporter 입니다."
+                            +"<br/>"
+                            + "신청을 수락 하시면"+joinlolid+" 님이 "+teamname+" 팀에 합류 합니다."
+                            + "<a href=\"team/accept?num="+number+"&lolid="+joinlolid+"&support="+support+"\">신청수락</a>";
+            facingDto.setContent(content);
+        }else{
+            String content =
+                    joinlolid+" 님의 포지션은 Jungler 입니다."
+                            +"<br/>"
+                            + "신청을 수락 하시면"+joinlolid+" 님이 "+teamname+" 팀에 합류 합니다."
+                            + "<a href=\"team/accept?num="+number+"&lolid="+joinlolid+"&jungle="+jungle+"\">신청수락</a>";
+            facingDto.setContent(content);
+        }
+
         facingDto.setTitle(title);
-        //내용
-        facingDto.setContent(contents);
+        facingDto.setWho(main);
+        facingDto.setWriter(joinlolid);
+
 
         facingDao.apply(facingDto);
 

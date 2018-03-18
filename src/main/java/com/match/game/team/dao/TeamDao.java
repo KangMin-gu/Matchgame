@@ -11,4 +11,5 @@ public interface TeamDao {
     public void dismantling(int number);
     public List<TeamDto> teamlist();
     public TeamDto teamContents(int num);
+    public void accept(TeamDto teamDto);
 }
