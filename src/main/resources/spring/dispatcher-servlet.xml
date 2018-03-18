@@ -6,7 +6,7 @@
 
              xmlns:context="http://www.springframework.org/schema/context"
 
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 
              xsi:schemaLocation="http://www.springframework.org/schema/beans
 
@@ -18,7 +18,7 @@
 
         http://www.springframework.org/schema/context
 
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
     <!--DataSource 설정 -->
@@ -57,8 +57,11 @@
     <context:component-scan base-package="com.match.game" />
     <context:component-scan base-package="com.match.game.mybatis" />
     <context:component-scan base-package="com.match.game.users.*" />
+    <context:component-scan base-package="com.match.game.team.*" />
     <context:component-scan base-package="com.match.game.util" />
 
+
+    <aop:aspectj-autoproxy/>
 </beans:beans>
 
 

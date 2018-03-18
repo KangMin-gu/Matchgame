@@ -4,13 +4,13 @@
 	<!--회원가입-->
 	<insert id="insert" parameterType="usersDto">
 
-	INSERT INTO users (id, pwd, name, email, phone, post, addr, detailaddr, regdate)
-	VALUES (#{id}, #{pwd},#{name}, #{email}, #{phone}, #{post}, #{addr}, #{detailaddr}, sysdate())
+	INSERT INTO users (id, pwd, lolid ,name, email, phone, post, addr, detailaddr, regdate)
+	VALUES (#{id}, #{pwd}, #{lolid}, #{name}, #{email}, #{phone}, #{post}, #{addr}, #{detailaddr}, sysdate())
 
 	</insert>
 	<!--회원정보가져오기-->
 	<select id="getData" parameterType="String" resultType="usersDto">
-		SELECT num, id, pwd, name, email, phone, post, addr, detailaddr, regdate FROM users where id=#{id}
+		SELECT num, id,  pwd, lolid, name, email, phone, post, addr, detailaddr, regdate FROM users where id=#{id}
 	</select>
 	<!--회원탈퇴-->
 	<delete id="delete" parameterType="String">
@@ -19,7 +19,7 @@
 
     <update id="update" parameterType="usersDto">
         UPDATE users SET
-        email=#{email}, pwd=#{pwd}, post=#{post}, addr=#{addr}, detailaddr=#{detailaddr}, phone=#{phone}
+       lolid=#{lolid}, email=#{email}, pwd=#{pwd}, post=#{post}, addr=#{addr}, detailaddr=#{detailaddr}, phone=#{phone}
         WHERE id=#{id}
     </update>
 </mapper>

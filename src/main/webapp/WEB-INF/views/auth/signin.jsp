@@ -16,6 +16,7 @@
     <input type="password" id="pwd" name="pwd">
     <input type="button" id="signInBtn" value="로그인">
     <input type="button" id="cancelBtn" value="취소">
+    <input type="button" id="findBtn" value="아이디 또는 비밀번호 찾기">
 </form>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 <script>

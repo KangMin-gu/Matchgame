@@ -26,6 +26,7 @@ public class UsersServiceImpl implements UsersService {
 
         String id = request.getParameter("id");
         String pwd = request.getParameter("pwd");
+        String lolid = request.getParameter("lolid");
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
@@ -38,6 +39,7 @@ public class UsersServiceImpl implements UsersService {
 
         usersDto.setId(id);
         usersDto.setPwd(hash);
+        usersDto.setLolid(lolid);
         usersDto.setName(name);
         usersDto.setEmail(email);
         usersDto.setPhone(phone);

@@ -16,6 +16,8 @@
 	<input type="text" id="pwd" name="pwd"/><br/>
 	<label for="pwdcheck">비밀번호 확인</label>
 	<input type="text" id="pwdcheck" name="pwdcheck" /><br/>
+	<label for="lolid">롤 아이디</label>
+	<input type="text" id="lolid" name="lolid"><br/>
 	<label for="name">이름</label>
 	<input type="text" id="name" name="name" /><br/>
 	<label for="email">이메일</label>

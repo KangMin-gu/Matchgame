@@ -7,6 +7,7 @@ public class UsersDto {
     private String pwd;
     private String name;
     private String email;
+    private String lolid;
     private String phone;
     private String post;
     private String addr;
@@ -15,12 +16,13 @@ public class UsersDto {
 
     public UsersDto(){}
 
-    public UsersDto(int num, String id, String pwd, String name, String email, String phone, String post, String addr, String detailaddr, String regdate) {
+    public UsersDto(int num, String id, String pwd, String name, String email, String lolid, String phone, String post, String addr, String detailaddr, String regdate) {
         this.num = num;
         this.id = id;
         this.pwd = pwd;
         this.name = name;
         this.email = email;
+        this.lolid = lolid;
         this.phone = phone;
         this.post = post;
         this.addr = addr;
@@ -66,6 +68,14 @@ public class UsersDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getLolid() {
+        return lolid;
+    }
+
+    public void setLolid(String lolid) {
+        this.lolid = lolid;
     }
 
     public String getPhone() {

@@ -17,6 +17,7 @@
 <p>나의 정보</p>
 ${dto.id}<br/>
 ${dto.name}<br/>
+${dto.lolid}<br/>
 ${dto.phone}<br/>
 ${dto.email}<br/>
 ${dto.addr}<br/>

@@ -18,6 +18,8 @@
     <input type="hidden" name="id" value="${dto.id}">
     <label for="id">아이디</label>
     <input type="text" id="id" name="id" value="${dto.id}" disabled><br/>
+    <label for="lolid">롤 아이디</label>
+    <input type="text" id="lolid" name="lolid" value="${dto.lolid}"><br/>
     <label for="pwd">비밀번호</label>
     <input type="password" id="pwd" name="pwd"><br/>
     <label for="pwdCheck">비밀번호 확인</label>
@@ -48,6 +50,7 @@
 
     $("#modifiedBtn").click(function(){
         var id = $("#id").val();
+        var lolid = $("#lolid").val();
         var pwd = $("#pwd").val();
         var pwdCheck = $("#pwdCheck").val();
         var email = $("#email").val();
@@ -59,7 +62,7 @@
             $.ajax({
                 url:"editauth",
                 method:"PUT",
-                data: JSON.stringify({id:id, pwd: pwd, email:email, post:post, addr:addr, detailaddr:detailaddr, phone:phone}),
+                data: JSON.stringify({id:id, lolid:lolid, pwd: pwd, email:email, post:post, addr:addr, detailaddr:detailaddr, phone:phone}),
                 contentType: 'application/json', //내가보내려는 데이터타입 즉 서버에서 받아들이는 데이터타입을 정한다.
                 //stringify 처리할때 content-type 을 'application/json' 로 꼭 정해줘야한다. 안하면 query형태로 인식하여 400에러를 리턴한다.
                 //결국 서버에서 어떤 contenttype으로 받아들이도록 구현했는지에 따라 정해진다.

@@ -6,11 +6,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- Mapper 에서 사용할 Dto 별칭 정의하기 -->
  	<typeAliases>
 		<typeAlias type="com.match.game.users.dto.UsersDto" alias="usersDto" />
+		<typeAlias type="com.match.game.team.dto.TeamDto" alias="teamDto" />
 	</typeAliases>
 	
 	<!-- sql 문을 정의하고 있는 xml 문서 -->
 <mappers>
 	<mapper resource="com/match/game/mybatis/UsersMapper.xml"/>
+	<mapper resource="com/match/game/mybatis/TeamMapper.xml"/>
 </mappers>
 
 </configuration>
