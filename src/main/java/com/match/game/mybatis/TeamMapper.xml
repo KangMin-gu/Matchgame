@@ -5,4 +5,20 @@
         INSERT INTO team (teamname, main, top, mid, bottom, jungle, support, win, lose, regdate)
         VALUES (#{teamname, jdbcType=VARCHAR}, #{main, jdbcType=VARCHAR}, #{top, jdbcType=VARCHAR}, #{mid, jdbcType=VARCHAR}, #{bottom, jdbcType=VARCHAR}, #{jungle, jdbcType=VARCHAR}, #{support, jdbcType=VARCHAR}, #{win, jdbcType=INTEGER}, #{lose, jdbcType=INTEGER}, sysdate())
     </insert>
+
+    <select id="myteam" parameterType="String" resultType="teamDto">
+        SELECT * from team where top=#{lolid} or mid=#{lolid} or bottom=#{lolid} or jungle=#{lolid} or support=#{lolid} or main=#{lolid}
+    </select>
+
+    <update id="secession" parameterType="teamDto">
+        update team
+        <set>
+            <if test="top != null">top=NULL ,</if>
+            <if test="mid != null">mid=NULL ,</if>
+            <if test="bottom != null">bottom=NULL ,</if>
+            <if test="support != null">support=NULL ,</if>
+            <if test="jungle != null">jungle=NULL </if>
+        </set>
+        WHERE num=#{num}
+    </update>
 </mapper>

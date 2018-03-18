@@ -2,16 +2,22 @@ package com.match.game.team.service;
 
 import com.match.game.team.dao.TeamDao;
 import com.match.game.team.dto.TeamDto;
+import com.match.game.users.dao.UsersDao;
+import com.match.game.users.dto.UsersDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Service
 public class TeamServiceImpl implements TeamService {
 
     @Autowired
     private TeamDao teamDao;
+    @Autowired
+    private UsersDao usersDao;
 
     //팀만들기
     @Override
@@ -51,4 +57,28 @@ public class TeamServiceImpl implements TeamService {
         teamDao.makeTeam(teamDto);
 
     }
+
+    //나의 팀정보 호출
+    @Override
+    public ModelAndView myteam(String id) {
+
+        ModelAndView mView= new ModelAndView();
+
+        UsersDto usersDto = usersDao.userInfo(id);
+        String lolid = usersDto.getLolid();
+        mView.addObject("dto", usersDto);
+
+        List<TeamDto> teamlist = teamDao.myteam(lolid);
+
+        mView.addObject("list", teamlist);
+        return mView;
+    }
+
+    //팀 탈퇴
+    @Override
+    public void teamsecession(TeamDto teamDto) {
+        teamDao.teamsecession(teamDto);
+    }
+
+
 }

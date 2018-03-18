@@ -93,7 +93,9 @@
         });
     });
 
-
+    $("#cancelBtn").click(function(){
+        location.href="${pageContext.request.contextPath}/team/teaminfo";
+    });
 </script>
 </body>
 </html>

@@ -1,12 +1,11 @@
 package com.match.game.team.controller;
 
+import com.match.game.team.dto.TeamDto;
 import com.match.game.team.service.TeamService;
 import com.match.game.users.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +19,7 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
+    //팀화면
     @RequestMapping(value = "/team/teaminfo", method = RequestMethod.GET)
     public String teaminfo(){
         return "team/teaminfo";
@@ -41,7 +41,21 @@ public class TeamController {
         teamService.makeTeam(request);
     }
 
+    //팀 정보가져오기
+    @RequestMapping(value = "/team/myteam/{id}", method = RequestMethod.GET)
+    public ModelAndView myteam(@PathVariable String id){
+        ModelAndView mView =  teamService.myteam(id);
+        mView.setViewName("team/myteam");
+        return mView;
+    }
 
+    //팀탈퇴
+    @RequestMapping(value = "/team/myteam/secession", method = RequestMethod.PUT)
+    @ResponseBody
+    public void teamsecsstion(@RequestBody TeamDto teamDto){
+        System.out.println(teamDto.getNum());
+        teamService.teamsecession(teamDto);
+    }
 
 
 }

@@ -16,8 +16,8 @@
 <body>
 팀화면 (팀 테이블에서 내가 팀에 속해있지 않으면 팀찾기 속해있으면 팀정보화면보여주기  )
 <ul>
-    <li><a href="${pageContext.request.contextPath}/team/myteam">나의 팀 정보</a></li>
-    <li><a href="${pageContext.request.contextPath}/team/findteam">팀 찾기</a></li>
+    <li><a href="${pageContext.request.contextPath}/team/myteam/${id}">나의 팀 정보</a></li>
+    <li><a href="${pageContext.request.contextPath}/team/teamlist">팀 찾기</a></li>
     <li><a href="${pageContext.request.contextPath}/team/make">팀 만들기</a></li>
     <li><a href="${pageContext.request.contextPath}/">홈</a></li>
 </ul>

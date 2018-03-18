@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class TeamDaoImpl implements TeamDao {
 
@@ -15,4 +17,17 @@ public class TeamDaoImpl implements TeamDao {
     public void makeTeam(TeamDto teamDto) {
         session.insert("team.insert", teamDto);
     }
+
+    @Override
+    public List<TeamDto> myteam(String lolid) {
+        List<TeamDto> teamlist = session.selectList("team.myteam", lolid);
+        return teamlist;
+    }
+
+    @Override
+    public void teamsecession(TeamDto teamDto) {
+        session.update("team.secession", teamDto);
+    }
+
+
 }
