@@ -5,11 +5,10 @@ import com.match.game.users.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class UsersController {
@@ -18,17 +17,18 @@ public class UsersController {
     private UsersService usersservice;
 
     //회원가입페이지
-    @RequestMapping(value = "/auth/signup", method = RequestMethod.GET)
+    @RequestMapping(value = "/auth", method = RequestMethod.GET)
     public String signup() {
         return "auth/signup";
     }
 
-    //회원가입 ajax
-    @RequestMapping(value = "/auth/insertSingup", method = RequestMethod.POST)
-    @ResponseBody
-    public void insertSingup(HttpServletRequest request) {
-        usersservice.insertSignup(request);
-
+    //회원가입
+    @RequestMapping(value = "/auth", method = RequestMethod.POST)
+    public ModelAndView insertSingup(@ModelAttribute UsersDto usersDto) {
+        System.out.println(usersDto.getId());
+        ModelAndView mView =  usersservice.insertSignup(usersDto);
+        mView.setViewName("auth/complete");
+        return mView;
     }
 
     //로그인페이지이동
@@ -37,53 +37,46 @@ public class UsersController {
         return "auth/signin";
     }
 
-    //ajax 로그인 요청
-    @RequestMapping(value = "/auth/signinresult", method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Object> signinResult(HttpServletRequest request){
-        Map<String, Object> result = usersservice.signinResult(request);
-        return result;
+    //로그인
+    @RequestMapping(value = "/auth/signin", method = RequestMethod.POST)
+    public ModelAndView signinResult(@ModelAttribute UsersDto usersDto, HttpServletRequest request){
+       ModelAndView mView = usersservice.signinResult(usersDto, request);
+       mView.setViewName("auth/signinresult");
+       return mView;
+    }
+
+    @RequestMapping(value = "/auth/signout", method = RequestMethod.GET)
+    public ModelAndView signout(HttpServletRequest request){
+
+        usersservice.signout(request);
+        ModelAndView mView = new ModelAndView();
+        mView.setViewName("redirect:/");
+        return mView;
     }
 
     //내정보가져오기
-    @RequestMapping(value = "/auth/info/{id}", method = RequestMethod.GET)
-    public ModelAndView myInfo(@PathVariable String id){
-        ModelAndView mView = usersservice.myInfo(id);
+    @RequestMapping(value = "/auth/{id}", method = RequestMethod.GET)
+    public ModelAndView myInfo(HttpServletRequest request, @PathVariable String id){
+        System.out.println("정보");
+        ModelAndView mView = usersservice.myInfo(request, id);
         mView.setViewName("auth/info");
         return mView;
     }
 
-    //로그아웃 ajax 인크루드스크립트구현
-    @RequestMapping(value = "/signout", method = RequestMethod.GET)
-    @ResponseBody
-    public void signout(HttpServletRequest request){
-        usersservice.signout(request);
-    }
-
     //회원탈퇴
-    @RequestMapping(value = "/auth/info/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public Map<String, Object> secession(HttpServletRequest request, @PathVariable String id){
+    @RequestMapping(value = "/auth/{id}", method = RequestMethod.DELETE)
+    public ModelAndView deletetest(HttpServletRequest request, @PathVariable String id){
         usersservice.secession(request, id);
-        System.out.println("삭제아이디"+id);
-        Map<String, Object> result = new HashMap<>();
-        result.put("result", true);
-        return result;
-    }
-
-    //회원정보수정페이지
-    @RequestMapping(value = "/auth/modified/{id}", method = RequestMethod.GET)
-    public ModelAndView modifiedForm(HttpServletRequest request, @PathVariable String id){
-        ModelAndView mView = usersservice.myInfo(id);
-        mView.setViewName("auth/modified");
+        ModelAndView mView = new ModelAndView();
+        mView.setViewName("redirect:/");
         return mView;
     }
 
-    @RequestMapping(value = "/auth/modified/editauth", method = RequestMethod.PUT)
-    @ResponseBody
-    public void modified(HttpServletRequest request, @RequestBody UsersDto usersDto){
-        System.out.println(usersDto.getId());
-        usersservice.modified(request, usersDto);
+    //회원수정
+    @RequestMapping(value = "/auth/{id}", method = RequestMethod.PUT)
+    public String modified(HttpServletRequest request, @ModelAttribute UsersDto usersDto){
+        usersservice.modified(usersDto);
+        return "redirect:/auth/{id}";
     }
 
 }

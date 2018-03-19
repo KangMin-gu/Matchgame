@@ -11,4 +11,4 @@ post varchar(20),
 addr varchar(200),
 detailaddr varchar(200),
 regdate DATE
-);
+); DEFAULT charset=utf8 collate utf8_general_ci;

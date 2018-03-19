@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>     
 <!DOCTYPE html>
 <html>
@@ -9,7 +8,7 @@
 </head>
 <body>
 <p>회원가입</p>
-<form id="signupForm">
+<form action="/auth" method="post" id="signupForm" accept-charset="UTF-8">
 	<label for="id">아이디</label>
 	<input type="text" id="id" name="id" /><br/>
 	<label for="pwd">비밀번호</label>
@@ -30,33 +29,11 @@
 	<input type="text" id="addr" name="addr"/><br/>
 	<label for="detailaddr">상세주소</label>
 	<input type="text" id="detailaddr" name="detailaddr" /><br/>
-	<input type="button" id="insertBtn" value="가입하기"/>
-	<input type="button" id="cancelBtn" value="취소하기"/>
+	<button type="submit" id="submit" name="submit">가입하기</button>
 </form>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 </body>
 <script>
-
-    $("#cancelBtn").click(function(){
-        location.href="${pageContext.request.contextPath}/";
-    });
-
-    $("#insertBtn").click(function(){
-
-        $.ajax({
-            url: "insertSingup",
-            method: "POST",
-            data: $("#signupForm").serialize(),
-            success: function(){
-                alert("회원가입 완료되었습니다.");
-                location.href="${pageContext.request.contextPath}/";
-            },
-            error:function(request, status, error){
-                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-
-            }
-        });
-    });
 
 </script>
 </html>

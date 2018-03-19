@@ -12,4 +12,5 @@ public interface TeamDao {
     public List<TeamDto> teamlist();
     public TeamDto teamContents(int num);
     public void accept(TeamDto teamDto);
+    public List<TeamDto> mainlolid(String lolid);
 }

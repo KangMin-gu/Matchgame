@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -22,71 +20,55 @@ public class UsersServiceImpl implements UsersService {
 
     //회원가입
     @Override
-    public void insertSignup(HttpServletRequest request) {
+    public ModelAndView insertSignup(UsersDto usersdto) {
 
-        String id = request.getParameter("id");
-        String pwd = request.getParameter("pwd");
-        String lolid = request.getParameter("lolid");
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String post = request.getParameter("post");
-        String addr = request.getParameter("addr");
-        String detailaddr = request.getParameter("detailaddr");
+        String hash = encoder.encode(usersdto.getPwd());
 
-        UsersDto usersDto = new UsersDto();
-        String hash = encoder.encode(pwd);
+        usersdto.setPwd(hash);
 
-        usersDto.setId(id);
-        usersDto.setPwd(hash);
-        usersDto.setLolid(lolid);
-        usersDto.setName(name);
-        usersDto.setEmail(email);
-        usersDto.setPhone(phone);
-        usersDto.setPost(post);
-        usersDto.setAddr(addr);
-        usersDto.setDetailaddr(detailaddr);
+        usersDao.insertSignup(usersdto);
 
-        usersDao.insertSignup(usersDto);
+        ModelAndView mView = new ModelAndView();
 
+        mView.addObject("email", usersdto.getEmail());
+        return mView;
     }
 
     //로그인요청
     @Override
-    public Map<String, Object> signinResult(HttpServletRequest request) {
+    public ModelAndView signinResult(UsersDto usersDto, HttpServletRequest request) {
 
-        String id = request.getParameter("id");
-        String pwd = request.getParameter("pwd");
-
-        UsersDto resultDto = usersDao.userInfo(id);
+        UsersDto resultDto = usersDao.userInfo(usersDto.getId());
 
         boolean isValid = false;
 
         if(resultDto != null){
-            boolean isMatch = encoder.matches(pwd, resultDto.getPwd());
+            boolean isMatch = encoder.matches(usersDto.getPwd(), resultDto.getPwd());
             if(isMatch) {
                 isValid = true;
             }
         }
 
-        Map<String, Object> result = new HashMap<>();
+        String url = request.getParameter("url");
+        ModelAndView mView = new ModelAndView();
 
         if(isValid){
-            request.getSession().setAttribute("id", resultDto.getId());
-            result.put("result", isValid);
-            result.put("id", resultDto.getId());
+            request.getSession().setAttribute("id", usersDto.getId());
+            mView.addObject("msg", usersDto.getId()+"님 환영합니다.");
+            mView.addObject("url", url);
         }else{
-            result.put("result", isValid);
+            String location = "auth/signin?url="+url;
+            mView.addObject("msg", "아이디 혹은 비밀번호를 확인해주세요.");
+            mView.addObject("url", location);
         }
-
-        return result;
-
+        return mView;
     }
 
     //내정보가져오기
     @Override
-    public ModelAndView myInfo(String id) {
-        UsersDto usersDto = usersDao.userInfo(id);
+    public ModelAndView myInfo(HttpServletRequest request, String id) {
+        String sessionId = (String) request.getSession().getAttribute("id");
+        UsersDto usersDto = usersDao.userInfo(sessionId);
         ModelAndView mView = new ModelAndView();
         mView.addObject("dto",usersDto);
         return mView;
@@ -97,6 +79,7 @@ public class UsersServiceImpl implements UsersService {
     public void signout(HttpServletRequest request) {
         request.getSession().invalidate();
     }
+
     //회원탈퇴
     @Override
     public void secession(HttpServletRequest request, String id) {
@@ -104,8 +87,9 @@ public class UsersServiceImpl implements UsersService {
         usersDao.secession(id);
     }
 
+    //회원정보수정
     @Override
-    public void modified(HttpServletRequest request, UsersDto usersDto) {
+    public void modified(UsersDto usersDto) {
         String pwd = usersDto.getPwd();
         String hash = encoder.encode(pwd);
         usersDto.setPwd(hash);

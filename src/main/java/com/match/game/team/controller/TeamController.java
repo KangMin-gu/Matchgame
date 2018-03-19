@@ -29,7 +29,7 @@ public class TeamController {
     @RequestMapping(value = "/team/make", method = RequestMethod.GET)
     public ModelAndView teammake(HttpServletRequest request){
        String id = (String) request.getSession().getAttribute("id");
-       ModelAndView mView= usersService.myInfo(id);
+       ModelAndView mView= usersService.myInfo(request, id);
        mView.setViewName("team/make");
        return mView;
     }
@@ -64,6 +64,7 @@ public class TeamController {
         int number = Integer.parseInt(num);
         teamService.dismantling(number);
     }
+
     //팀리스트
     @RequestMapping(value = "/team/teamlist", method = RequestMethod.GET)
     public ModelAndView teamlist(){
@@ -71,6 +72,7 @@ public class TeamController {
         mView.setViewName("team/teamlist");
         return mView;
     }
+
     //팀상세보기
     @RequestMapping(value = "/team/contents/{num}", method = RequestMethod.GET)
     public ModelAndView teamcontents(@PathVariable int num) {
@@ -79,6 +81,7 @@ public class TeamController {
         mView.setViewName("team/contents");
         return mView;
     }
+
     //팀신청
     @RequestMapping(value = "/team/join", method = RequestMethod.GET)
     public ModelAndView joinForm (HttpServletRequest request){

@@ -52,9 +52,17 @@ public class TeamDaoImpl implements TeamDao {
         return teamDto;
     }
 
+    //팀 수락
     @Override
     public void accept(TeamDto teamDto) {
         session.update("team.accept", teamDto);
+    }
+
+    //내가 메인인팀의 정보
+    @Override
+    public List<TeamDto> mainlolid(String lolid) {
+        List<TeamDto> teamList = session.selectList("team.mainlolid", lolid);
+        return teamList;
     }
 
 

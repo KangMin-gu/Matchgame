@@ -12,9 +12,7 @@ public class UsersDaoImpl implements UsersDao {
     private SqlSession session;
     //회원가입
     @Override
-    public void insertSignup(UsersDto usersDto) {
-        session.insert("users.insert", usersDto);
-    }
+    public void insertSignup(UsersDto usersDto) { session.insert("users.insert", usersDto); }
     //회원정보검색
     @Override
     public UsersDto userInfo(String id) {
@@ -25,7 +23,7 @@ public class UsersDaoImpl implements UsersDao {
     public void secession(String id) {
         session.delete("users.delete", id);
     }
-
+    //회원정보수정
     @Override
     public void modified(UsersDto usersDto) {
         session.update("users.update", usersDto);

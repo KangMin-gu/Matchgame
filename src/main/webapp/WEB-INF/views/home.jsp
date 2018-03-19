@@ -16,15 +16,15 @@
 <c:choose>
     <c:when test="${not empty id}">
         <ul>
-            <li><a href="auth/info/${id}">회원정보</a></li>
+            <li><a href="auth/${id}">회원정보</a></li>
             <li><a href="team/teaminfo">팀 관리</a></li>
             <li><a id="facingNo" href="facing/list">쪽지함</a></li>
-            <li><a href="javascript:logout()">로그아웃</a></li>
+            <li><a href="auth/signout">로그아웃</a></li>
         </ul>
     </c:when>
     <c:otherwise>
         <ul>
-            <li><a href="auth/signup">회원가입</a></li>
+            <li><a href="auth">회원가입</a></li>
             <li><a href="auth/signin">로그인</a></li>
         </ul>
     </c:otherwise>

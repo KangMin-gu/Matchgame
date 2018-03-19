@@ -51,4 +51,9 @@
             </set>
             WHERE num=#{num}
     </update>
+
+    <!-- 내가 메인인 팀의 정보 가져오기 -->
+    <select id="mainlolid" parameterType="String" resultType="teamDto">
+        SELECT * FROM team WHERE main=#{lolid}
+    </select>
 </mapper>
