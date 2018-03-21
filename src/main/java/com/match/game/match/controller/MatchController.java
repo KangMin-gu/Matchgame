@@ -17,8 +17,9 @@ public class MatchController {
     private MatchService matchService;
 
     //해당팀 대전신청하기
-    @RequestMapping(value = "/match/vs/{num}", method = RequestMethod.GET)
+    @RequestMapping(value = "/team/contents/match/vs/{num}", method = RequestMethod.GET)
     public ModelAndView vsForm(HttpServletRequest request, @PathVariable int num){
+        System.out.println("매치컨트롤러들어옴");
         ModelAndView mView = new ModelAndView();
         matchService.vsForm(request, num);
         mView.setViewName("match/vs");
