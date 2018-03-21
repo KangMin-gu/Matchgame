@@ -27,10 +27,12 @@ public class FacingController {
     }
 
     //신청서 쪽지 발송
-    @RequestMapping(value = "/team/apply", method = RequestMethod.POST)
-    @ResponseBody
-    public void apply(HttpServletRequest request){
+    @RequestMapping(value = "/team/jonin/apply", method = RequestMethod.POST)
+    public ModelAndView apply(HttpServletRequest request){
         facingService.apply(request);
+        ModelAndView mView = new ModelAndView();
+        mView.setViewName("facing/success");
+        return mView;
     }
 
     //서버과부화 막기위해 페이지로딩마다 쪽지 안읽은 쪽지 갯수 확인

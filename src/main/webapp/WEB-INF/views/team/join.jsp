@@ -15,31 +15,31 @@
 </head>
 <body>
 팀신청서
-<form id="joinForm">
-    <input type="hidden" name="num" id="num" value="${num}">
-    <input type="hidden" name="main" id="main" value="${main}">
+<form action="/team/jonin/apply" method="post" id="joinForm">
+    <input type="hidden" name="num" id="num" value="${dto.num}">
+    <input type="hidden" name="main" id="main" value="${dto.main}">
     <label for="teamname">팀 이름</label>
-    <input type="hidden" name="teamname" value="${teamname}">
-    <input type="text" id="teamname" name="teamname" value="${teamname}" disabled><br/>
+    <input type="hidden" name="teamname" value="${dto.teamname}">
+    <input type="text" id="teamname" name="teamname" value="${dto.teamname}" disabled><br/>
 
     <p>자신의 포지션을 선택해주세요.</p>
 
-    <label for="top">탑</label>
+    <label for="top">탑: ${dto.top}</label>
     <input class="Confirm" type="radio" id="top" name="top" value="${lolid}">
-    <label for="mid">미드</label>
+    <label for="mid">미드: ${dto.mid}</label>
     <input class="Confirm" type="radio" id="mid" name="mid" value="${lolid}">
-    <label for="jungle">정글</label>
+    <label for="jungle">정글: ${dto.jungle}</label>
     <input class="Confirm" type="radio" id="jungle" name="jungle" value="${lolid}">
-    <label for="bottom">원딜</label>
+    <label for="bottom">원딜: ${dto.bottom}</label>
     <input class="Confirm" type="radio" id="bottom" name="bottom" value="${lolid}">
-    <label for="support">서폿</label>
+    <label for="support">서폿: ${dto.support}</label>
     <input class="Confirm" type="radio" id="support" name="support" value="${lolid}"><br/>
 
-    <p>신청서를 보내고 주장(${main})님이 수락을 하면 팀에 참가하게 됩니다.</p>
-
-    <input type="button" id="applyBtn" value="신청서보내기">
-    <input type="button" id="cancelBtn" value="취소">
+    <p>신청서를 보내고 주장(${dto.main})님이 수락을 하면 팀에 참가하게 됩니다.</p>
+    <button type="submit" id="submit" name="submit">신청서 발송</button>
+    <a href="/team/list">팀전체리스트</a>
 </form>
+
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 <script>
     //체크박스 하나만 가능하게
@@ -81,7 +81,7 @@
             data: $("#joinForm").serialize(),
             success:function(){
                 alert("팀 가입 신청되었습니다.");
-                location.href="${pageContext.request.contextPath}/team/teamlist";
+                location.href="${pageContext.request.contextPath}/team/list";
             },
             error:function(request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
@@ -90,7 +90,7 @@
     });
 
     $("#cancelBtn").click(function(){
-        location.href="${pageContext.request.contextPath}/team/teamlist";
+        location.href="${pageContext.request.contextPath}/team/list";
     });
 
 </script>

@@ -19,10 +19,28 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
-    //팀화면
-    @RequestMapping(value = "/team/teaminfo", method = RequestMethod.GET)
-    public String teaminfo(){
-        return "team/teaminfo";
+    //나의 팀 정보가져오기
+    @RequestMapping(value = "/team/{id}", method = RequestMethod.GET)
+    public ModelAndView myteam(HttpServletRequest request){
+        System.out.println("팀들어옴");
+        ModelAndView mView =  teamService.myteam(request);
+        mView.setViewName("team/myteam");
+        return mView;
+    }
+
+    //팀 탈퇴
+    @RequestMapping(value = "/team/{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public void teamsecsstion(@RequestBody TeamDto teamDto){
+        teamService.teamsecession(teamDto);
+    }
+
+    //팀 리스트
+    @RequestMapping(value = "/team/list", method = RequestMethod.GET)
+    public ModelAndView teamlist(){
+        ModelAndView mView = teamService.teamlist();
+        mView.setViewName("team/teamlist");
+        return mView;
     }
 
     //팀 만들기페이지 이동하면서 세션아이디 가져가기
@@ -34,46 +52,24 @@ public class TeamController {
        return mView;
     }
 
-    //팀만들기 요청
-    @RequestMapping(value = "/team/make/maketeam", method = RequestMethod.POST)
-    @ResponseBody
-    public void maketeam(HttpServletRequest request){
-        teamService.makeTeam(request);
-    }
-
-    //팀 정보가져오기
-    @RequestMapping(value = "/team/myteam/{id}", method = RequestMethod.GET)
-    public ModelAndView myteam(@PathVariable String id){
-        ModelAndView mView =  teamService.myteam(id);
-        mView.setViewName("team/myteam");
+    //팀 만들기 요청
+    @RequestMapping(value = "/team/make", method = RequestMethod.POST)
+    public ModelAndView maketeam(HttpServletRequest request, @ModelAttribute TeamDto teamDto){
+        System.out.println(teamDto.getTeamname());
+        ModelAndView mView = teamService.makeTeam(request, teamDto);
+        mView.setViewName("team/makeresult");
         return mView;
     }
 
-    //팀탈퇴
-    @RequestMapping(value = "/team/myteam/secession", method = RequestMethod.PUT)
+    //팀 해체
+    @RequestMapping(value = "/team/{num}", method = RequestMethod.DELETE)
     @ResponseBody
-    public void teamsecsstion(@RequestBody TeamDto teamDto){
-        System.out.println(teamDto.getNum());
-        teamService.teamsecession(teamDto);
-    }
-
-    //팀해체
-    @RequestMapping(value = "/team/myteam/{num}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public void Dismantiling(@PathVariable String num){
+    public void Dismantiling(HttpServletRequest request, @PathVariable String num){
         int number = Integer.parseInt(num);
         teamService.dismantling(number);
     }
 
-    //팀리스트
-    @RequestMapping(value = "/team/teamlist", method = RequestMethod.GET)
-    public ModelAndView teamlist(){
-        ModelAndView mView = teamService.teamlist();
-        mView.setViewName("team/teamlist");
-        return mView;
-    }
-
-    //팀상세보기
+    //팀 정보상세보기
     @RequestMapping(value = "/team/contents/{num}", method = RequestMethod.GET)
     public ModelAndView teamcontents(@PathVariable int num) {
         System.out.println(num);
@@ -82,10 +78,11 @@ public class TeamController {
         return mView;
     }
 
-    //팀신청
-    @RequestMapping(value = "/team/join", method = RequestMethod.GET)
-    public ModelAndView joinForm (HttpServletRequest request){
-        ModelAndView mView = teamService.joinForm(request);
+    //팀신청폼
+    @RequestMapping(value = "/team/join/{num}", method = RequestMethod.GET)
+    public ModelAndView joinForm (HttpServletRequest request,@PathVariable int num){
+        System.out.println("가입신청서폼 번호"+num);
+        ModelAndView mView = teamService.joinForm(request, num);
         mView.setViewName("team/join");
         return mView;
     }

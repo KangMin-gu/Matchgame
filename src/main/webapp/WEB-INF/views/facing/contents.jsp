@@ -22,6 +22,7 @@
   내용:  ${dto.content}
 </div><br/>
 보낸날짜:${dto.regdate}<br/>
+
 <a href="${pageContext.request.contextPath}/facing/list">목록가기</a>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 <script>

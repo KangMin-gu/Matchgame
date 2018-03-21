@@ -41,6 +41,7 @@
     </tbody>
 </table>
 <ul>
+    <li><a href="${pageContext.request.contextPath}/team/${id}">나의 팀 목록</a></li>
     <li><a href="${pageContext.request.contextPath}/">홈</a></li>
 </ul>
 </body>

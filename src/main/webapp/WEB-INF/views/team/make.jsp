@@ -15,7 +15,7 @@
 </head>
 <body>
 팀만들기
-<form id="teamMakeForm">
+<form action="/team/make" method="post">
     <label for="teamname">팀 이름</label>
     <input type="text" id="teamname" name="teamname"><br/>
     <label for="main">주장</label>
@@ -34,7 +34,7 @@
     <label for="support">서폿</label>
     <input class="Confirm" type="radio" id="support" name="support" value="${dto.lolid}"><br/>
 
-    <input type="button" id="makeTeamBtn" value="팀 생성">
+    <button type="submit" id="submit" name="submit">팀 창설</button>
     <input type="button" id="cancelBtn" value="취소">
 </form>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
@@ -70,27 +70,6 @@
         $("#jungle").prop('checked', false);
         $("#bottom").prop('checked', false);
         $("#top").prop('checked', false);
-    });
-
-
-//팀만들기 ajax  요청
-
-    $("#makeTeamBtn").click(function(){
-
-        console.log( $("input:radio[name=jungle]").is(':checked'));
-
-        $.ajax({
-            url:"make/maketeam",
-            method: "POST",
-            data: $("#teamMakeForm").serialize(),
-            success:function(){
-                alert("${dto.id}님 팀이 생성되었습니다. 팀원을 초대하세요.");
-                location.href="${pageContext.request.contextPath}/team/teaminfo";
-            },
-            error:function(request, status, error){
-                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            }
-        });
     });
 
     $("#cancelBtn").click(function(){
