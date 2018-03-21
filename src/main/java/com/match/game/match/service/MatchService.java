@@ -7,4 +7,5 @@ import javax.servlet.http.HttpServletRequest;
 public interface MatchService {
 
     public ModelAndView vsForm(HttpServletRequest request, int num);
+
 }

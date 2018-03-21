@@ -35,7 +35,7 @@
         <tr>
             <td>${tmp.num}</td>
             <td>${tmp.writer}</td>
-            <td><a href="${pageContext.request.contextPath}/facing/contents/${tmp.num}">${tmp.title}</a></td>
+            <td><a href="${pageContext.request.contextPath}/facing/${tmp.num}">${tmp.title}</a></td>
             <td>${tmp.viewer}</td>
             <td>${tmp.regdate}</td>
         </tr>

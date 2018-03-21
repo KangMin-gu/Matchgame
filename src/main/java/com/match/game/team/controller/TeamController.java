@@ -70,7 +70,7 @@ public class TeamController {
     }
 
     //팀 정보상세보기
-    @RequestMapping(value = "/team/contents/{num}", method = RequestMethod.GET)
+    @RequestMapping(value = "/team/list/{num}", method = RequestMethod.GET)
     public ModelAndView teamcontents(@PathVariable int num) {
         System.out.println(num);
         ModelAndView mView = teamService.teamContents(num);
@@ -88,7 +88,7 @@ public class TeamController {
     }
 
     //팀 합류
-    @RequestMapping(value = "/facing/contents/team/accept", method = RequestMethod.GET)
+    @RequestMapping(value = "/facing/team/accept", method = RequestMethod.GET)
     public ModelAndView accept(HttpServletRequest request){
         ModelAndView mView = teamService.accept(request);
         mView.setViewName("team/accept");

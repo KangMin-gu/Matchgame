@@ -17,7 +17,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 <script>
     alert("수락 되었습니다. ${lolid}님이 이제부터 팀에 합류합니다.");
-    location.href="${pageContext.request.contextPath}/facing/list";
+    location.href="${pageContext.request.contextPath}/facing";
 </script>
 </body>
 </html>

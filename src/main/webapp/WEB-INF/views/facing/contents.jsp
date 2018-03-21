@@ -23,7 +23,7 @@
 </div><br/>
 보낸날짜:${dto.regdate}<br/>
 
-<a href="${pageContext.request.contextPath}/facing/list">목록가기</a>
+<a href="${pageContext.request.contextPath}/facing">목록가기</a>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 <script>
     function join(num, top, mid, bottom, support, jungle){

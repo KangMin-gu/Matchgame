@@ -18,7 +18,7 @@ $(document).ready(function(){
     var check = '${id}';
     if(check != ""){
         $.ajax({
-            url:"facing/${id}",
+            url:"check/${id}",
             method:"GET",
             dataType:'json',
             success:function(data) {

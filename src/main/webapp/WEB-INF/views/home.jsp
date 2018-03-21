@@ -17,7 +17,7 @@
     <c:when test="${not empty id}">
         <ul>
             <li><a href="auth/${id}">회원정보</a></li>
-            <li><a id="facingNo" href="facing/list">쪽지함</a></li>
+            <li><a id="facingNo" href="facing">쪽지함</a></li>
             <li><a href="#">팀 관리</a></li>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/team/${id}">나의 팀 정보</a></li>

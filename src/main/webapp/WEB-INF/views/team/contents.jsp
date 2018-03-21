@@ -27,7 +27,7 @@
 
 <a href="/team/list">리스트가기</a>
 <a href="/team/join/${dto.num}">가입신청</a>
-<a href="${pageContext.request.contextPath}/match/vs?num=${dto.num}">대전신청</a>
+<a href="/match/${dto.num}">대전신청</a>
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.js "></script>
 <script>

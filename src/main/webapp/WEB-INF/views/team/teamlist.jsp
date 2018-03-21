@@ -32,7 +32,7 @@
     <tbody>
     <c:forEach items="${allList}" var="tmp">
         <tr>
-            <td><a href="contents/${tmp.num}">${tmp.teamname}</a></td>
+            <td><a href="list/${tmp.num}">${tmp.teamname}</a></td>
             <td>${tmp.win}</td>
             <td>${tmp.lose}</td>
             <td>${tmp.main}</td>
